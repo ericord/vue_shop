@@ -6,19 +6,19 @@
                 <img src="../assets/logo.png" alt="">
             </div>
             <!-- 登录表单区域 -->
-            <el-form :model="loginForm" label-width="0px" class="login_form">
+            <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
                 <!-- 用户名 -->
-                <el-form-item>
+                <el-form-item prop="username">
                     <el-input prefix-icon="el-icon-user" v-model="loginForm.username"></el-input>
                 </el-form-item>
                 <!-- 密码 -->
-                <el-form-item>
-                    <el-input prefix-icon="el-icon-lock" v-model="loginForm.password" show-password></el-input>
+                <el-form-item prop="password">
+                    <el-input prefix-icon="el-icon-lock" v-model="loginForm.password" show-password ></el-input>
                 </el-form-item>
                 <!-- 按钮区域 -->
                 <el-form-item class="btns">
                     <el-button type="primary">登录</el-button>
-                    <el-button type="info" >重置</el-button>
+                    <el-button type="info" @click="restLoginForm">重置</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -31,9 +31,22 @@ export default {
     data() {
         return {
             // 这是登录表单的数据绑定对象
-            loginForm:{
-                username:'zs',
-                password:'111'
+            loginForm: {
+                username: 'zs',
+                password: '111'
+            },
+            // 这是表单的验证规则对象
+            loginFormRules: {
+                //这是用户名的验证规则
+                username: [
+                    { required: true, message: "请输入登录名称", trigger: "blur" }
+                    , { min: 3, max: 10, message: "长度在3到10个字符", trigger: "blur" }
+                ],
+                //这是密码的验证规则
+                password: [
+                    { required: true, message: "请输入登录密码", trigger: "blur" }
+                    , { min: 6, max: 15, message: "长度在6到15个字符", trigger: "blur" }
+                ],
             }
         };
     },
@@ -43,7 +56,9 @@ export default {
     },
 
     methods: {
-
+        restLoginForm(){
+            this.$refs.loginFormRef.resetFields();
+        }
     },
 };
 </script >
@@ -81,11 +96,13 @@ export default {
             background-color: #eee;
         }
     }
-    .btns{
+
+    .btns {
         display: flex;
         justify-content: flex-end;
     }
-    .login_form{
+
+    .login_form {
         position: absolute;
         bottom: 0px;
         width: 100%;
