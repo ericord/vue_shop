@@ -46,15 +46,26 @@ export default {
   name: 'VueShopHome',
 
   data() {
-    return {}
+    return {
+      // 左侧菜单数据
+      menuList: [],
+    }
   },
 
   mounted() {},
-
+  created() {
+    this.getMenuList()
+  },
   methods: {
     logout() {
       window.sessionStorage.clear()
       this.$router.push('/login')
+    },
+    async getMenuList() {
+      const { data: res } = await this.$http.get('menus')
+      if(res.meta.status!==200)return this.$message.error('获取菜单失败')
+      this.menuList=res.data
+      console.log(res)
     },
   },
 }
