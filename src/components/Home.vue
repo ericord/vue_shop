@@ -18,20 +18,21 @@
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <el-submenu index="1">
+          <el-submenu :index="item.id" v-for="item in menuList" :key="item.id">
             <!-- 一级菜单的模板区域 -->
             <template slot="title">
               <!-- 图标 -->
               <i class="el-icon-location"></i>
               <!-- 文本 -->
-              <span>导航一</span>
+              <span>{{ item.name }}</span>
             </template>
+
             <!-- 二级菜单 -->
-            <el-menu-item index="1-4-1">
+            <el-menu-item index="1-4-1" v-for="i in item.childs" :key="i.id" :index="i.id">
               <!-- 图标 -->
               <i class="el-icon-location"></i>
               <!-- 文本 -->
-              <span>导航一</span>
+              <span>{{ i.name }}</span>
             </el-menu-item>
           </el-submenu>
         </el-menu>
@@ -63,8 +64,8 @@ export default {
     },
     async getMenuList() {
       const { data: res } = await this.$http.get('menus')
-      if(res.meta.status!==200)return this.$message.error('获取菜单失败')
-      this.menuList=res.data
+      if (res.meta.status !== 200) return this.$message.error('获取菜单失败')
+      this.menuList = res.data
       console.log(res)
     },
   },
