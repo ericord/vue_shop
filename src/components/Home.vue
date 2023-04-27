@@ -16,21 +16,27 @@
         <el-menu
           background-color="#313743"
           text-color="#fff"
-          active-text-color="#ffd04b"
+          active-text-color="#409eff"
         >
           <el-submenu :index="item.id" v-for="item in menuList" :key="item.id">
             <!-- 一级菜单的模板区域 -->
             <template slot="title">
               <!-- 图标 -->
-              <i class="el-icon-location"></i>
+              <!-- <i :class="iconObj[item.id]"></i> -->
+              <i :class="iconObj[item.id]"></i>
               <!-- 文本 -->
               <span>{{ item.name }}</span>
             </template>
 
             <!-- 二级菜单 -->
-            <el-menu-item index="1-4-1" v-for="i in item.childs" :key="i.id" :index="i.id">
+            <el-menu-item
+              index="1-4-1"
+              v-for="i in item.childs"
+              :key="i.id"
+              :index="i.id"
+            >
               <!-- 图标 -->
-              <i class="el-icon-location"></i>
+              <i class="el-icon-menu"></i>
               <!-- 文本 -->
               <span>{{ i.name }}</span>
             </el-menu-item>
@@ -50,6 +56,13 @@ export default {
     return {
       // 左侧菜单数据
       menuList: [],
+      iconObj: {
+        '/001': 'icon-font el-icon-user-solid',
+        '/002': 'icon-font el-icon-check',
+        '/003': 'icon-font el-icon-s-shop',
+        '/004': 'icon-font el-icon-s-order',
+        '/005': 'icon-font el-icon-s-marketing',
+      },
     }
   },
 
@@ -99,5 +112,9 @@ export default {
 }
 .el-main {
   background-color: #e9edf1;
+}
+
+.icon-font {
+  margin-right: 10px;
 }
 </style>
