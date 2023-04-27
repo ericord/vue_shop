@@ -17,6 +17,7 @@
           background-color="#313743"
           text-color="#fff"
           active-text-color="#409eff"
+          unique-opened
         >
           <el-submenu :index="item.id" v-for="item in menuList" :key="item.id">
             <!-- 一级菜单的模板区域 -->
@@ -109,6 +110,9 @@ export default {
 }
 .el-aside {
   background-color: #313743;
+  .el-menu {
+    border-right: none;
+  }
 }
 .el-main {
   background-color: #e9edf1;
