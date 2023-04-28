@@ -22,6 +22,7 @@
           :collapse="isCollapse"
           :collapse-transition="false"
           router
+          :default-active="this.$route.path"
         >
           <el-submenu :index="item.id" v-for="item in menuList" :key="item.id">
             <!-- 一级菜单的模板区域 -->
