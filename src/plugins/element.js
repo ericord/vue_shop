@@ -13,6 +13,11 @@ import {
   Submenu,
   MenuItemGroup,
   MenuItem,
+  Breadcrumb,
+  BreadcrumbItem,
+  Card,
+  Row,
+  Col,
 } from 'element-ui'
 
 const elements = [
@@ -28,6 +33,11 @@ const elements = [
   Submenu,
   MenuItemGroup,
   MenuItem,
+  Breadcrumb,
+  BreadcrumbItem,
+  Card,
+  Row,
+  Col,
 ]
 elements.forEach((e) => Vue.use(e))
 Vue.prototype.$message = Message
