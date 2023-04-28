@@ -48,7 +48,7 @@
         </el-menu>
       </el-aside>
       <!-- 右侧内容主题 -->
-      <el-main>Main</el-main>
+      <el-main><router-view></router-view></el-main>
     </el-container>
   </el-container>
 </template>
