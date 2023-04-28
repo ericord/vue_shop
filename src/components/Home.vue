@@ -21,6 +21,7 @@
           unique-opened
           :collapse="isCollapse"
           :collapse-transition="false"
+          router
         >
           <el-submenu :index="item.id" v-for="item in menuList" :key="item.id">
             <!-- 一级菜单的模板区域 -->
@@ -34,10 +35,9 @@
 
             <!-- 二级菜单 -->
             <el-menu-item
-              index="1-4-1"
               v-for="i in item.childs"
               :key="i.id"
-              :index="i.id"
+              :index="'/'+i.path"
             >
               <!-- 图标 -->
               <i class="el-icon-menu"></i>
