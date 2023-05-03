@@ -20,6 +20,7 @@ import {
   Col,
   Table,
   TableColumn,
+  Switch,
 } from 'element-ui'
 
 const elements = [
@@ -42,6 +43,7 @@ const elements = [
   Col,
   Table,
   TableColumn,
+  Switch,
 ]
 elements.forEach((e) => Vue.use(e))
 Vue.prototype.$message = Message
