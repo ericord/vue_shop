@@ -57,6 +57,17 @@
           </template>
         </el-table-column>
       </el-table>
+      <!-- 分页区域 -->
+      <el-pagination
+        @size-change="sizeChangeHandle"
+        @current-change="currentChangeHandle"
+        :page-sizes="[1, 2, 3, 4, 5]"
+        :page-size="queryInfo.pageSize"
+        :current-page="queryInfo.pageNum"
+        :total="total"
+        layout="total, sizes, prev, pager, next, jumper"
+      >
+      </el-pagination>
     </el-card>
   </div>
 </template>
@@ -70,11 +81,11 @@ export default {
   data() {
     return {
       userList: [],
-      totol: 0,
+      total: 0,
       queryInfo: {
         query: '',
         pageNum: 1,
-        pageSize: 10,
+        pageSize: 1,
       },
     }
   },
@@ -90,9 +101,17 @@ export default {
         return this.$message.error('获取用户列表失败')
       this.$message.success('获取用户列表成功')
       this.userList = res.data.users
-      this.totol = res.data.total
-      this.pageNum = res.data.pageNum
-      console.log(res.data)
+      this.total = res.data.total
+      //   this.pageNum = res.data.pageNum
+      console.log(this.total)
+    },
+    sizeChangeHandle(nextValue) {
+      this.queryInfo.pageSize = nextValue
+      this.getUserList()
+    },
+    currentChangeHandle(nextValue) {
+      this.queryInfo.pageNum = nextValue
+      this.getUserList()
     },
   },
 }
