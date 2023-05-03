@@ -18,6 +18,8 @@ import {
   Card,
   Row,
   Col,
+  Table,
+  TableColumn,
 } from 'element-ui'
 
 const elements = [
@@ -38,6 +40,8 @@ const elements = [
   Card,
   Row,
   Col,
+  Table,
+  TableColumn,
 ]
 elements.forEach((e) => Vue.use(e))
 Vue.prototype.$message = Message

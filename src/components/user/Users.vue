@@ -18,6 +18,15 @@
           <el-button type="primary">添加用户</el-button>
         </el-col>
       </el-row>
+      <!-- 表格区域 -->
+      <el-table :data="userList" border stripe>
+        <el-table-column label="姓名" prop="userName"> </el-table-column>
+        <el-table-column label="邮箱" prop="email"> </el-table-column>
+        <el-table-column label="电话" prop="mobile"> </el-table-column>
+        <el-table-column label="角色" prop="roleName"> </el-table-column>
+        <el-table-column label="状态" prop="status"> </el-table-column>
+        <el-table-column label="操作"> </el-table-column>
+      </el-table>
     </el-card>
   </div>
 </template>
@@ -49,7 +58,7 @@ export default {
       })
       if (res.meta.status !== 200)
         return this.$message.error('获取用户列表失败')
-      this.$message.success("获取用户列表成功")
+      this.$message.success('获取用户列表成功')
       this.userList = res.data.users
       this.totol = res.data.total
       this.pageNum = res.data.pageNum
@@ -58,4 +67,9 @@ export default {
   },
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.el-table {
+  margin-top: 15px;
+  font-size: 12px;
+}
+</style>
