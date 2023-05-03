@@ -21,6 +21,7 @@ import {
   Table,
   TableColumn,
   Switch,
+  Tooltip,
 } from 'element-ui'
 
 const elements = [
@@ -44,6 +45,7 @@ const elements = [
   Table,
   TableColumn,
   Switch,
+  Tooltip,
 ]
 elements.forEach((e) => Vue.use(e))
 Vue.prototype.$message = Message
