@@ -23,6 +23,7 @@ import {
   Switch,
   Tooltip,
   Pagination,
+  Dialog,
 } from 'element-ui'
 
 const elements = [
@@ -48,6 +49,7 @@ const elements = [
   Switch,
   Tooltip,
   Pagination,
+  Dialog,
 ]
 elements.forEach((e) => Vue.use(e))
 Vue.prototype.$message = Message

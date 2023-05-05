@@ -10,7 +10,12 @@
     <el-card>
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="请输入内容" v-model="queryInfo.userName" clearable @clear="getUserList">
+          <el-input
+            placeholder="请输入内容"
+            v-model="queryInfo.userName"
+            clearable
+            @clear="getUserList"
+          >
             <el-button
               @click="getUserList"
               slot="append"
@@ -19,7 +24,9 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">添加用户</el-button>
+          <el-button type="primary" @click="addDialogViible = true"
+            >添加用户</el-button
+          >
         </el-col>
       </el-row>
       <!-- 表格区域 -->
@@ -77,6 +84,19 @@
       >
       </el-pagination>
     </el-card>
+
+    <!-- 添加用户弹框 -->
+    <el-dialog title="添加用户" :visible.sync="addDialogViible" width="50%">
+      <!-- 内容区域 -->
+      <span>hahahaha</span>
+      <!-- 按钮区域 -->
+      <span slot="footer" class="dialog-footer">
+        <el-button type="info" @click="addDialogViible = flase">取消</el-button>
+        <el-button type="primary" @click="addDialogViible = flase"
+          >确定</el-button
+        >
+      </span>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -95,6 +115,7 @@ export default {
         pageNum: 1,
         pageSize: 1,
       },
+      addDialogViible: false,
     }
   },
 
