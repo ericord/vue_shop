@@ -88,7 +88,25 @@
     <!-- 添加用户弹框 -->
     <el-dialog title="添加用户" :visible.sync="addDialogViible" width="50%">
       <!-- 内容区域 -->
-      <span>hahahaha</span>
+      <el-form
+        :rules="addUserRules"
+        ref="addUserRef"
+        :model="addForm"
+        label-width="70px"
+      >
+        <el-form-item label="用户名" prop="userName">
+          <el-input :model="addForm.userName"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input :model="addForm.password"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱" prop="email">
+          <el-input :model="addForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="手机" prop="mobile">
+          <el-input :model="addForm.mobile"></el-input>
+        </el-form-item>
+      </el-form>
       <!-- 按钮区域 -->
       <span slot="footer" class="dialog-footer">
         <el-button type="info" @click="addDialogViible = flase">取消</el-button>
@@ -116,6 +134,24 @@ export default {
         pageSize: 1,
       },
       addDialogViible: false,
+      addForm: {
+        userName: '',
+        password: '',
+        email: '',
+        mobile: '',
+      },
+      addUserRules: {
+        userName: [
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 3, max: 11, message: '请输入3~11个字符', trigger: 'blur' },
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '请输入6~15个字符', trigger: 'blur' },
+        ],
+        email: [{ required: true, message: '请输入邮箱', trigger: 'blur' }],
+        mobile: [{ required: true, message: '请输手机', trigger: 'blur' }],
+      },
     }
   },
 
