@@ -95,16 +95,16 @@
         label-width="70px"
       >
         <el-form-item label="用户名" prop="userName">
-          <el-input :model="addForm.userName"></el-input>
+          <el-input v-model="addForm.userName"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input :model="addForm.password"></el-input>
+          <el-input v-model="addForm.password" type="password"></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input :model="addForm.email"></el-input>
+          <el-input v-model="addForm.email" type="email"></el-input>
         </el-form-item>
         <el-form-item label="手机" prop="mobile">
-          <el-input :model="addForm.mobile"></el-input>
+          <el-input v-model="addForm.mobile"></el-input>
         </el-form-item>
       </el-form>
       <!-- 按钮区域 -->
@@ -125,6 +125,22 @@ export default {
   },
 
   data() {
+    var checkEmail = (rule, value, cb) => {
+      const regEmail =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (regEmail.test(value)) {
+        return cb()
+      }
+      cb(new Error('请输入合法的邮箱'))
+    }
+    var checkMobile = (rule, value, cb) => {
+      const regMobile =
+      /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/
+      if (regMobile.test(value)) {
+        return cb()
+      }
+      cb(new Error('请输入合法的手机号'))
+    }
     return {
       userList: [],
       total: 0,
@@ -143,14 +159,17 @@ export default {
       addUserRules: {
         userName: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 3, max: 11, message: '请输入3~11个字符', trigger: 'blur' },
+          { min: 3, max: 11, message: '请输入3~11个字符', trigger: 'change' },
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { min: 6, max: 15, message: '请输入6~15个字符', trigger: 'blur' },
+          { min: 6, max: 15, message: '请输入6~15个字符', trigger: 'change' },
         ],
-        email: [{ required: true, message: '请输入邮箱', trigger: 'blur' }],
-        mobile: [{ required: true, message: '请输手机', trigger: 'blur' }],
+        email: [
+          { required: true, message: '请输入邮箱', trigger: 'blur' },
+          { validator: checkEmail, trigger: 'change' },
+        ],
+        mobile: [{ required: true, message: '请输手机号', trigger: 'change' },{ validator: checkMobile, trigger: 'change' },],
       },
     }
   },
