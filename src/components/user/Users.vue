@@ -115,9 +115,7 @@
       <!-- 按钮区域 -->
       <span slot="footer" class="dialog-footer">
         <el-button type="info" @click="addDialogViible = flase">取消</el-button>
-        <el-button type="primary" @click="addDialogViible = flase"
-          >确定</el-button
-        >
+        <el-button type="primary" @click="addUser">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -172,11 +170,11 @@ export default {
         ],
         email: [
           { required: true, message: '请输入邮箱', trigger: 'blur' },
-          { validator: checkEmail, trigger: 'change' },
+          // { validator: checkEmail, trigger: 'change' },
         ],
         mobile: [
           { required: true, message: '请输手机号', trigger: 'change' },
-          { validator: checkMobile, trigger: 'change' },
+          // { validator: checkMobile, trigger: 'change' },
         ],
       },
     }
@@ -214,6 +212,19 @@ export default {
     },
     addDialogClosed() {
       this.$refs.addUserRef.resetFields()
+    },
+    addUser() {
+      this.$refs.addUserRef.validate(async (valid) => {
+        if (!valid) return
+        console.log(1)
+        const { data: res } = await this.$http.post('user', this.addForm)
+        console.log(2)
+        if (res.meta.status != 200) return this.$message.error('添加用户失败')
+        console.log(3)
+        this.$message.success('添加用户成功')
+        this.getUserList()
+        this.addDialogViible = false
+      })
     },
   },
 }
