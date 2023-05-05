@@ -86,7 +86,12 @@
     </el-card>
 
     <!-- 添加用户弹框 -->
-    <el-dialog title="添加用户" :visible.sync="addDialogViible" width="50%">
+    <el-dialog
+      title="添加用户"
+      :visible.sync="addDialogViible"
+      width="50%"
+      @close="addDialogClosed"
+    >
       <!-- 内容区域 -->
       <el-form
         :rules="addUserRules"
@@ -135,7 +140,7 @@ export default {
     }
     var checkMobile = (rule, value, cb) => {
       const regMobile =
-      /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/
+        /^(?:(?:\+|00)86)?1(?:(?:3[\d])|(?:4[5-79])|(?:5[0-35-9])|(?:6[5-7])|(?:7[0-8])|(?:8[\d])|(?:9[1589]))\d{8}$/
       if (regMobile.test(value)) {
         return cb()
       }
@@ -169,7 +174,10 @@ export default {
           { required: true, message: '请输入邮箱', trigger: 'blur' },
           { validator: checkEmail, trigger: 'change' },
         ],
-        mobile: [{ required: true, message: '请输手机号', trigger: 'change' },{ validator: checkMobile, trigger: 'change' },],
+        mobile: [
+          { required: true, message: '请输手机号', trigger: 'change' },
+          { validator: checkMobile, trigger: 'change' },
+        ],
       },
     }
   },
@@ -203,6 +211,9 @@ export default {
       }
       this.$message.success('修改用户状态成功')
       this.getUserList()
+    },
+    addDialogClosed() {
+      this.$refs.addUserRef.resetFields()
     },
   },
 }
