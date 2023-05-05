@@ -10,8 +10,12 @@
     <el-card>
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="请输入内容">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-input placeholder="请输入内容" v-model="queryInfo.userName" clearable @clear="getUserList">
+            <el-button
+              @click="getUserList"
+              slot="append"
+              icon="el-icon-search"
+            ></el-button>
           </el-input>
         </el-col>
         <el-col :span="4">
@@ -87,7 +91,7 @@ export default {
       userList: [],
       total: 0,
       queryInfo: {
-        query: '',
+        userName: '',
         pageNum: 1,
         pageSize: 1,
       },
@@ -117,7 +121,7 @@ export default {
     },
     async userStatusChange(userInfo) {
       userInfo.status = userInfo.status ? 1 : 2
-      const { data: res }  = await this.$http.post('user', userInfo)
+      const { data: res } = await this.$http.post('user', userInfo)
       if (res.meta.status !== 200) {
         return this.$message.error('修改用户状态失败')
       }
