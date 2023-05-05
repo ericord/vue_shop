@@ -27,7 +27,11 @@
         <el-table-column label="角色" prop="roleName"> </el-table-column>
         <el-table-column label="状态" prop="status">
           <template v-slot="scope">
-            <el-switch v-model="scope.row.status" :active-value="1"></el-switch>
+            <el-switch
+              @change="userStatusChange(scope.row)"
+              v-model="scope.row.status"
+              :active-value="1"
+            ></el-switch>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="180px">
@@ -102,8 +106,6 @@ export default {
       this.$message.success('获取用户列表成功')
       this.userList = res.data.users
       this.total = res.data.total
-      //   this.pageNum = res.data.pageNum
-      console.log(this.total)
     },
     sizeChangeHandle(nextValue) {
       this.queryInfo.pageSize = nextValue
@@ -111,6 +113,15 @@ export default {
     },
     currentChangeHandle(nextValue) {
       this.queryInfo.pageNum = nextValue
+      this.getUserList()
+    },
+    async userStatusChange(userInfo) {
+      userInfo.status = userInfo.status ? 1 : 2
+      const { data: res }  = await this.$http.post('user', userInfo)
+      if (res.meta.status !== 200) {
+        return this.$message.error('修改用户状态失败')
+      }
+      this.$message.success('修改用户状态成功')
       this.getUserList()
     },
   },
