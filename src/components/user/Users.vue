@@ -57,6 +57,7 @@
               type="danger"
               icon="el-icon-delete"
               size="mini"
+              @click="removeUserById(scope.row.id)"
             ></el-button>
             <el-tooltip
               content="管理权限"
@@ -287,6 +288,23 @@ export default {
       this.editForm = row
       console.log(this.editForm)
       this.editDialogVisible = true
+    },
+    async removeUserById(id) {
+      console.log(id)
+      const res = await this.$confirm('是否确认删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }).catch((err) => err)
+      if (res === 'confirm') {
+        const { data: res } = await this.$http.delete('user/' + id)
+        this.showMessage(res, '删除用户成功', '删除用户失败')
+        this.getUserList()
+      }
+    },
+    showMessage(res, suc, fail) {
+      if (res.meta.status !== 200) return this.$message.error(fail)
+      this.$message.success(suc)
     },
   },
 }

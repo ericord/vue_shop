@@ -24,6 +24,7 @@ import {
   Tooltip,
   Pagination,
   Dialog,
+  MessageBox,
 } from 'element-ui'
 
 const elements = [
@@ -52,4 +53,5 @@ const elements = [
   Dialog,
 ]
 elements.forEach((e) => Vue.use(e))
+Vue.prototype.$confirm = MessageBox.confirm
 Vue.prototype.$message = Message
