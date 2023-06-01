@@ -16,17 +16,33 @@
               v-for="(item1, i1) in scope.row.children"
               :key="item1.rightId"
             >
-              <el-col :span="5">
+              <el-col :span="1">&nbsp;</el-col>
+              <el-col :span="4">
                 <el-tag>
                   {{ item1.rightName }}
                 </el-tag>
                 <i class="el-icon-caret-right"></i>
               </el-col>
-              <el-col :span="19"></el-col>
+              <el-col :span="19">
+                <el-row :class="[i2==0?'':'bdtop']" v-for="(item2, i2) in item1.children">
+                  <el-col :span="12">
+                    <el-tag>
+                      {{ item2.rightName }}
+                    </el-tag>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-row v-for="(item3, i3) in item2.children"> 
+                      <el-tag>
+                      {{ item3.rightName }}
+                    </el-tag>
+                    </el-row>
+                  </el-col>
+                </el-row>
+              </el-col>
             </el-row>
           </template>
         </el-table-column>
-        <el-table-column type="index"></el-table-column>
+        <el-table-column label="#" type="index"></el-table-column>
         <el-table-column label="角色名称" prop="roleName"></el-table-column>
         <el-table-column label="角色描述" prop="roleDesc"></el-table-column>
         <el-table-column label="操作" width="300">
