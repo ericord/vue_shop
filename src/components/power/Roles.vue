@@ -25,17 +25,16 @@
               </el-col>
               <el-col :span="19">
                 <el-row :class="[i2==0?'':'bdtop']" v-for="(item2, i2) in item1.children">
-                  <el-col :span="12">
-                    <el-tag>
+                  <el-col :span="6">
+                    <el-tag type="success">
                       {{ item2.rightName }}
                     </el-tag>
+                    <i class="el-icon-caret-right"></i>
                   </el-col>
-                  <el-col :span="12">
-                    <el-row v-for="(item3, i3) in item2.children"> 
-                      <el-tag>
+                  <el-col :span="18">
+                      <el-tag type="warning" v-for="(item3, i3) in item2.children" :key="item3.id">
                       {{ item3.rightName }}
                     </el-tag>
-                    </el-row>
                   </el-col>
                 </el-row>
               </el-col>
