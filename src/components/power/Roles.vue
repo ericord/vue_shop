@@ -12,7 +12,7 @@
         <el-table-column type="expand">
           <template v-slot="scope">
             <el-row
-              :class="['bdbottom', i1 === 0 ? 'bdtop' : '']"
+              :class="['bdbottom', i1 === 0 ? 'bdtop' : '','vcenter']"
               v-for="(item1, i1) in scope.row.children"
               :key="item1.rightId"
             >
@@ -24,7 +24,7 @@
                 <i class="el-icon-caret-right"></i>
               </el-col>
               <el-col :span="19">
-                <el-row :class="[i2==0?'':'bdtop']" v-for="(item2, i2) in item1.children">
+                <el-row :class="[i2==0?'':'bdtop','vcenter']" v-for="(item2, i2) in item1.children">
                   <el-col :span="6">
                     <el-tag type="success">
                       {{ item2.rightName }}
@@ -97,5 +97,9 @@ export default {
 }
 .bdbottom {
   border-bottom: #eee 1px solid;
+}
+.vcenter{
+  display:flex;
+  align-items: center;
 }
 </style>
